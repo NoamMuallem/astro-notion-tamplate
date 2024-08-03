@@ -1,3 +1,28 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import { NavBar } from "../features/navBar";
+const { Title } = Astro.props;
+// ssr the navbar, to allow maximum SEO
+export const prerender = false;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <ViewTransitions />
+    <title>{Title}</title>
+  </head>
+  <body>
+    <NavBar client:load />
+    <main>
+      <slot transition:animate="slide" />
+    </main>
+  </body>
+</html>
+
 <style is:global>
   .card {
     @apply flex flex-col items-center gap-4 border-2 border-solid border-gray-500 rounded-2xl p-4 shadow-xl shadow-sky-400/20 dark:shadow-sky-800/20 bg-slate-200 dark:bg-slate-700;
@@ -17,7 +42,10 @@
     box-sizing: border-box;
   }
   body {
-    @apply min-h-full p-4 text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-900;
+    @apply min-h-full text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-900;
+  }
+  main {
+    @apply p-4;
   }
   ::-webkit-scrollbar {
     @apply w-3;

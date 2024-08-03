@@ -33,6 +33,7 @@ export function ContactUsForm() {
                         Name:
                     </label>
                     <TextInput type="text" id="name" name="name" />
+                    {/* @ts-ignore */}
                     {error?.fields?.["name"] && <div className="text-red-500">{error?.fields?.["name"][0]}</div>}
                 </div>
                 <div className="flex flex-col gap-1 justify-center w-full">
@@ -43,6 +44,7 @@ export function ContactUsForm() {
                         Email:
                     </label>
                     <TextInput type="email" id="email" name="email" />
+                    {/* @ts-ignore */}
                     {error?.fields?.["email"] && <div className="text-red-500">{error?.fields?.["email"][0]}</div>}
                 </div>
                 <div className="flex flex-col gap-1 justify-center w-full">
@@ -53,6 +55,7 @@ export function ContactUsForm() {
                         Message:
                     </label>
                     <TextArea id="message" name="message"></TextArea>
+                    {/* @ts-ignore */}
                     {error?.fields?.["message"] && <div className="text-red-500">{error?.fields?.["message"][0]}</div>}
                 </div>
                 {data?.success && <div>Tank you for contacting us</div>}

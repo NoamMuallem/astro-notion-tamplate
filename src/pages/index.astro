@@ -1,27 +1,18 @@
 ---
-import "../../GlobalStyles.astro";
 import { ContactUsForm } from "../features/contactUsForm";
+import MainLayout from "../layouts/mainLayout.astro";
 export const prerender = false;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>My Astro Notion Landing Page!</h1>
-    <h2>
-      This website is a tamplate to check astro performences and banchmarks when
-      using notion as a backend for writes and red, in addition it will be
-      tested in ssr and ssg node
-    </h2>
-    <section>
-      <h2>Contact us form (using astro actions):</h2>
-      <ContactUsForm client:load />
-    </section>
-  </body>
-</html>
+<MainLayout title="Home">
+  <h1>My Astro Notion Landing Page!</h1>
+  <h2>
+    This website is a tamplate to check astro performences and banchmarks when
+    using notion as a backend for writes and red, in addition it will be tested
+    in ssr and ssg node
+  </h2>
+  <section>
+    <h2>Contact us form (using astro actions):</h2>
+    <ContactUsForm client:load />
+  </section>
+</MainLayout>
