@@ -1,7 +1,8 @@
+import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import { defineConfig, envField } from "astro/config";
 
-import react from "@astrojs/react";
+import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,8 +16,14 @@ export default defineConfig({
           context: "server",
           access: "public",
           optional: false
+        }),
+        NOTION_CONTACT_US_DB_ID: envField.string({
+          context: "server",
+          access: "public",
+          optional: false
         })
       }
     }
-  }
+  },
+  adapter: netlify()
 });
