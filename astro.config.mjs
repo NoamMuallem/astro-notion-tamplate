@@ -15,15 +15,20 @@ export default defineConfig({
         NOTION_INTEGRATION_TOKEN: envField.string({
           context: "server",
           access: "public",
-          optional: false
+          optional: false,
         }),
         NOTION_CONTACT_US_DB_ID: envField.string({
           context: "server",
           access: "public",
-          optional: false
-        })
-      }
-    }
+          optional: false,
+        }),
+        NOTION_POSTS_DB: envField.string({
+          context: "server",
+          access: "public",
+          optional: false,
+        }),
+      },
+    },
   },
-  adapter: netlify()
+  adapter: netlify(),
 });

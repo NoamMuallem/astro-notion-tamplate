@@ -1,7 +1,7 @@
 import { Client } from "@notionhq/client";
 import {
-    type BlockObjectResponse,
-    type PageObjectResponse,
+  type BlockObjectResponse,
+  type PageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 import { NOTION_INTEGRATION_TOKEN } from "astro:env/server";
 import { cache } from "react";
@@ -10,17 +10,29 @@ export const notionClient = new Client({
   auth: NOTION_INTEGRATION_TOKEN,
 });
 
-export const getPages = cache(({ databaseID }: { databaseID: string }) => {
-  return notionClient.databases.query({
-    filter: {
-      property: "Status",
-      status: {
-        equals: "Published",
-      },
-    },
-    database_id: databaseID,
-  });
-});
+export const getPages = cache(
+  ({
+    databaseID,
+    publishedOnly = true,
+  }: {
+    databaseID: string;
+    publishedOnly?: boolean;
+  }) => {
+    return notionClient.databases.query({
+      ...(publishedOnly
+        ? {
+            filter: {
+              property: "Status",
+              status: {
+                equals: "Published",
+              },
+            },
+          }
+        : {}),
+      database_id: databaseID,
+    });
+  }
+);
 
 export const getPageContent = cache((pageId: string) => {
   return notionClient.blocks.children
@@ -28,7 +40,7 @@ export const getPageContent = cache((pageId: string) => {
     .then((res) => res.results as BlockObjectResponse[]);
 });
 
-export const getPageBySlug = cache((slug: string, databaseId:string) => {
+export const getPageBySlug = cache((slug: string, databaseId: string) => {
   return notionClient.databases
     .query({
       database_id: databaseId,
@@ -46,12 +58,12 @@ export const addLeadToNotion = async ({
   name,
   email,
   message,
-  databaseId
+  databaseId,
 }: {
-  name:string,
-  email:string,
-  message:string,
- databaseId:string
+  name: string;
+  email: string;
+  message: string;
+  databaseId: string;
 }) => {
   if (!databaseId || !notionClient || !name || !email || !message)
     throw new Error("Failed to save message");

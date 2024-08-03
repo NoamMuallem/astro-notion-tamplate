@@ -1,0 +1,113 @@
+---
+import { NOTION_POSTS_DB } from "astro:env/server";
+import { getPages } from "../../actions/DB";
+import { PostPreview } from "../../components/postPreview";
+
+// get all blog posts
+const allPosts = await getPages({ databaseID: NOTION_POSTS_DB }).then((data) =>
+  data.results
+    //@ts-expect-error: Notion does not supply a full type coverage for it's tables
+    .map(({ properties }) => {
+      return {
+        title: properties.Title.title[0].plain_text as string,
+        slug: properties.Slug.rich_text[0].plain_text as string,
+        image: properties.BannerImage.url as string,
+        description: properties.Description.rich_text[0].plain_text as string,
+      };
+    })
+    .reverse()
+);
+
+export const prerender = true;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <h1>My Astro Notion Landing Page!</h1>
+    <h2>
+      This website is a tamplate to check astro performences and banchmarks when
+      using notion as a backend for writes and red, in addition it will be
+      tested in ssr and ssg node
+    </h2>
+    <section>
+      <h2>All posts page</h2>
+      <h3>
+        all the posts are fetched from notion and only key properties about the
+        posts are shown here
+      </h3>
+      <ul>
+        {allPosts.map((post) => <PostPreview {...post} />)}
+      </ul>
+    </section>
+  </body>
+</html>
+
+<style is:global>
+  .card {
+    @apply flex flex-col items-center gap-4 border-2 border-solid border-gray-500 rounded-2xl p-4 shadow-xl shadow-sky-400/20 dark:shadow-sky-800/20 bg-slate-200 dark:bg-slate-700;
+  }
+  h1 {
+    @apply text-4xl font-bold;
+  }
+  h2 {
+    @apply text-2xl font-semibold;
+  }
+  section {
+    @apply my-4 flex flex-col gap-4 justify-start align-middle w-full;
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  body {
+    @apply min-h-full p-4 text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-900;
+  }
+  ::-webkit-scrollbar {
+    @apply w-3;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-purple-700 dark:bg-purple-500 bg-opacity-20;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-purple-500 dark:bg-purple-700 bg-opacity-20 dark:bg-opacity-100 shadow-2xl rounded-full;
+  }
+
+  /** Shiki theme - Light/Dark mode **/
+  :root {
+    --astro-code-color-text: #24292f;
+    --astro-code-color-background: #ffffff;
+    --astro-code-token-constant: #0550ae;
+    --astro-code-token-string: #24292f;
+    --astro-code-token-comment: #6e7781;
+    --astro-code-token-keyword: #cf222e;
+    --astro-code-token-parameter: #24292f;
+    --astro-code-token-function: #8250df;
+    --astro-code-token-string-expression: #0a3069;
+    --astro-code-token-punctuation: #24292f;
+    --astro-code-token-link: #000012;
+  }
+
+  html.dark {
+    --astro-code-color-text: #c9d1d9;
+    --astro-code-color-background: #0d1117;
+    --astro-code-token-constant: #79c0ff;
+    --astro-code-token-string: #a5d6ff;
+    --astro-code-token-comment: #8b949e;
+    --astro-code-token-keyword: #ff7b72;
+    --astro-code-token-parameter: #c9d1d9;
+    --astro-code-token-function: #d2a8ff;
+    --astro-code-token-string-expression: #a5d6ff;
+    --astro-code-token-punctuation: #c9d1d9;
+    --astro-code-token-link: #000012;
+  }
+</style>

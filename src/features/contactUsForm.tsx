@@ -24,10 +24,10 @@ export function ContactUsForm() {
 
     return (
         <>
-            <form action={action} className="apply flex flex-col items-center gap-4 border-2 border-solid border-gray-500 rounded-2xl p-4 shadow-xl shadow-sky-400/20 dark:shadow-sky-800/20 bg-slate-200 dark:bg-slate-700">
-                <div className="apply flex flex-col gap-1 justify-center w-full">
+            <form action={action} className="flex flex-col items-center gap-4 border-2 border-solid border-gray-500 rounded-2xl p-4 shadow-xl shadow-sky-400/20 dark:shadow-sky-800/20 bg-slate-200 dark:bg-slate-700">
+                <div className="flex flex-col gap-1 justify-center w-full">
                     <label
-                        className="apply text-slate-800 dark:text-slate-300"
+                        className="text-slate-800 dark:text-slate-300"
                         htmlFor="name"
                     >
                         Name:
@@ -35,9 +35,9 @@ export function ContactUsForm() {
                     <TextInput type="text" id="name" name="name" />
                     {error?.fields?.["name"] && <div className="text-red-500">{error?.fields?.["name"][0]}</div>}
                 </div>
-                <div className="apply flex flex-col gap-1 justify-center w-full">
+                <div className="flex flex-col gap-1 justify-center w-full">
                     <label
-                        className="apply text-slate-800 dark:text-slate-300"
+                        className="text-slate-800 dark:text-slate-300"
                         htmlFor="email"
                     >
                         Email:
@@ -45,9 +45,9 @@ export function ContactUsForm() {
                     <TextInput type="email" id="email" name="email" />
                     {error?.fields?.["email"] && <div className="text-red-500">{error?.fields?.["email"][0]}</div>}
                 </div>
-                <div className="apply flex flex-col gap-1 justify-center w-full">
+                <div className="flex flex-col gap-1 justify-center w-full">
                     <label
-                        className="apply text-slate-800 dark:text-slate-300"
+                        className="text-slate-800 dark:text-slate-300"
                         htmlFor="message"
                     >
                         Message:
@@ -58,7 +58,7 @@ export function ContactUsForm() {
                 {data?.success && <div>Tank you for contacting us</div>}
                 {error?.cause === "INTERNAL_SERVER_ERROR" && <div>Failed to submit form</div>}
                 <button
-                    className="apply font-bold text-lg bg-sky-500 dark:bg-sky-700 text-white dark:text-white rounded-xl p-2 w-1/6 shadow-xl shadow-sky-400/20 dark:shadow-sky-800/20"
+                    className="font-bold text-lg bg-sky-500 dark:bg-sky-700 text-white dark:text-white rounded-xl p-2 w-1/6 shadow-xl shadow-sky-400/20 dark:shadow-sky-800/20"
                 >
                     Send
                 </button>
