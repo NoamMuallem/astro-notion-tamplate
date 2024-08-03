@@ -4,12 +4,13 @@ import { NotionRenderer } from "@notion-render/client";
 import hljsPlugin from "@notion-render/hljs-plugin";
 import type { GetStaticPaths } from "astro";
 import { NOTION_POSTS_DB } from "astro:env/server";
+import "../../GlobalStyles.astro";
 import {
   getPageBySlug,
   getPageContent,
   getPages,
   notionClient,
-} from "../../actions/DB";
+} from "../../utils/DB";
 
 // This only runs suring the build time of the pages, it gets all the available slugs
 export const getStaticPaths = (async () => {
@@ -83,69 +84,6 @@ const html = await notionRenderer.render(...content);
     </article>
   </body>
 </html>
-
-<style is:global>
-  .card {
-    @apply flex flex-col items-center gap-4 border-2 border-solid border-gray-500 rounded-2xl p-4 shadow-xl shadow-sky-400/20 dark:shadow-sky-800/20 bg-slate-200 dark:bg-slate-700;
-  }
-  h1 {
-    @apply text-4xl font-bold;
-  }
-  h2 {
-    @apply text-2xl font-semibold;
-  }
-  section {
-    @apply my-4 flex flex-col gap-4 justify-start align-middle w-full;
-  }
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-  body {
-    @apply min-h-full p-4 text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-900;
-  }
-  ::-webkit-scrollbar {
-    @apply w-3;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-purple-700 dark:bg-purple-500 bg-opacity-20;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-purple-500 dark:bg-purple-700 bg-opacity-20 dark:bg-opacity-100 shadow-2xl rounded-full;
-  }
-
-  /** Shiki theme - Light/Dark mode **/
-  :root {
-    --astro-code-color-text: #24292f;
-    --astro-code-color-background: #ffffff;
-    --astro-code-token-constant: #0550ae;
-    --astro-code-token-string: #24292f;
-    --astro-code-token-comment: #6e7781;
-    --astro-code-token-keyword: #cf222e;
-    --astro-code-token-parameter: #24292f;
-    --astro-code-token-function: #8250df;
-    --astro-code-token-string-expression: #0a3069;
-    --astro-code-token-punctuation: #24292f;
-    --astro-code-token-link: #000012;
-  }
-
-  html.dark {
-    --astro-code-color-text: #c9d1d9;
-    --astro-code-color-background: #0d1117;
-    --astro-code-token-constant: #79c0ff;
-    --astro-code-token-string: #a5d6ff;
-    --astro-code-token-comment: #8b949e;
-    --astro-code-token-keyword: #ff7b72;
-    --astro-code-token-parameter: #c9d1d9;
-    --astro-code-token-function: #d2a8ff;
-    --astro-code-token-string-expression: #a5d6ff;
-    --astro-code-token-punctuation: #c9d1d9;
-    --astro-code-token-link: #000012;
-  }
-</style>
 
 <style is:global>
   .notion-heading_1 {
