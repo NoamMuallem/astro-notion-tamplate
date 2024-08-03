@@ -1,6 +1,6 @@
 import { experimental_withState as withState } from "@astrojs/react/actions";
 import { actions } from "astro:actions";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { TextArea } from "../components/inputs/textArea";
 import { TextInput } from "../components/inputs/textInput";
 
@@ -20,11 +20,12 @@ export function ContactUsForm() {
         }
     );
 
-    useEffect(() => { console.log({ data, error }) }, [data, error])
-
     return (
         <>
             <form action={action} className="flex flex-col items-center gap-4 border-2 border-solid border-gray-500 rounded-2xl p-4 shadow-xl shadow-sky-400/20 dark:shadow-sky-800/20 bg-slate-200 dark:bg-slate-700">
+                <div>This is a client component, we can choose to prerender it on the server</div>
+                <div>Or to statically generate the entire page, and sent the JS needed to render this part</div>
+                <div>{`SEO - right click -> view page source -> search SEO`}</div>
                 <div className="flex flex-col gap-1 justify-center w-full">
                     <label
                         className="text-slate-800 dark:text-slate-300"
