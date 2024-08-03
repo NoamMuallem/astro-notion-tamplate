@@ -1,0 +1,22 @@
+---
+import { cn } from "../utils/cn";
+const { slug, image, title, description } = Astro.props as {
+  slug: string;
+  image: string;
+  title: string;
+  description: string;
+};
+---
+
+<li
+  class={cn(
+    "card",
+    "w-fit hover:bg-slate-300 dark:hover:bg-slate-600 cursor-pointer"
+  )}
+>
+  <a href={`/blog/${slug}`}>
+    <img transition:name="postBannerImage" src={image} alt={title} />
+    <h2 transition:name="postTitle">{title}</h2>
+    <p>{description}</p>
+  </a>
+</li>

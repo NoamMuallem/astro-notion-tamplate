@@ -4,7 +4,6 @@ import { NotionRenderer } from "@notion-render/client";
 import hljsPlugin from "@notion-render/hljs-plugin";
 import type { GetStaticPaths } from "astro";
 import { NOTION_POSTS_DB } from "astro:env/server";
-import "../../GlobalStyles.astro";
 import MainLayout from "../../layouts/mainLayout.astro";
 import {
   getPageBySlug,
@@ -66,8 +65,18 @@ const html = await notionRenderer.render(...content);
       transition:name="post"
       class="flex flex-col justify-center items-center"
     >
-      <h1 class="mb-8 text-6xl font-black capitalize">{title}</h1>
-      <img alt="Blog Image" src={image} class="[width: 800px]!" />
+      <h1
+        transition:name="postTitle"
+        class="mb-8 text-6xl font-black capitalize"
+      >
+        {title}
+      </h1>
+      <img
+        transition:name="postBannerImage"
+        alt="Blog Image"
+        src={image}
+        class="[width: 800px]!"
+      />
     </div>
     <div
       class="mt-4 max-w-4xl space-y-6 text-xl leading-10 prose lg:prose-xl
