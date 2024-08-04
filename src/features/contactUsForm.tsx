@@ -4,9 +4,13 @@ import { TextArea } from "../components/inputs/textArea";
 import { TextInput } from "../components/inputs/textInput";
 import { getErrorMessage } from "../utils/errorParser";
 
-const formFieldsNames = ["name", "email", "message"] as const;
-type FormFields = typeof formFieldsNames[number];
-type ValidationError = Record<FormFields, string[]>;
+export const FormFieldsObject = {
+    Name: "name",
+    Email: "email",
+    Message: "message",
+} as const;
+type AllFormFieldsNames = (typeof FormFieldsObject)[keyof typeof FormFieldsObject];
+type ValidationError = Record<AllFormFieldsNames, string[]>;
 
 export function ContactUsForm() {
     const [submissionError, setSubmissionError] = useState<string | null>(null);
@@ -48,32 +52,32 @@ export function ContactUsForm() {
             <div className="flex flex-col gap-1 justify-center w-full">
                 <label
                     className="text-slate-800 dark:text-slate-300"
-                    htmlFor="name"
+                    htmlFor={FormFieldsObject.Name}
                 >
                     Name:
                 </label>
-                <TextInput type="text" id="name" name="name" />
-                {validationError?.["name"] && <div className="text-red-500">{validationError?.["name"][0]}</div>}
+                <TextInput type="text" id={FormFieldsObject.Name} name={FormFieldsObject.Name} />
+                {validationError?.[FormFieldsObject.Name] && <div className="text-red-500">{validationError?.["name"][0]}</div>}
             </div>
             <div className="flex flex-col gap-1 justify-center w-full">
                 <label
                     className="text-slate-800 dark:text-slate-300"
-                    htmlFor="email"
+                    htmlFor={FormFieldsObject.Email}
                 >
                     Email:
                 </label>
-                <TextInput type="email" id="email" name="email" />
-                {validationError?.["email"] && <div className="text-red-500">{validationError?.["email"][0]}</div>}
+                <TextInput type={FormFieldsObject.Email} id={FormFieldsObject.Email} name={FormFieldsObject.Email} />
+                {validationError?.[FormFieldsObject.Email] && <div className="text-red-500">{validationError?.["email"][0]}</div>}
             </div>
             <div className="flex flex-col gap-1 justify-center w-full">
                 <label
                     className="text-slate-800 dark:text-slate-300"
-                    htmlFor="message"
+                    htmlFor={FormFieldsObject.Message}
                 >
                     Message:
                 </label>
-                <TextArea id="message" name="message"></TextArea>
-                {validationError?.["message"] && <div className="text-red-500">{validationError?.["message"][0]}</div>}
+                <TextArea id={FormFieldsObject.Message} name={FormFieldsObject.Message}></TextArea>
+                {validationError?.[FormFieldsObject.Message] && <div className="text-red-500">{validationError?.["message"][0]}</div>}
             </div>
             {submissionError && <div className="text-red-500">{`Failed to submit form: ${submissionError}`}</div>}
             {formSubmittedSuccessfully && <div className="text-green-500">Thank you for contacting us!</div>}

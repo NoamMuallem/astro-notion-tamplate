@@ -1,12 +1,15 @@
 import { ActionError, defineAction, z } from "astro:actions";
 import { NOTION_CONTACT_US_DB_ID } from "astro:env/server";
+import { FormFieldsObject } from "../features/contactUsForm";
 import { addLeadToNotion } from "../utils/DB";
 
 export const contactUsFormSubmission = defineAction({
   input: z.object({
-    name: z.string().min(5, { message: "Name cannot be shorter then 5" }),
-    email: z.string().email({ message: "Invalid email" }),
-    message: z
+    [FormFieldsObject.Name]: z
+      .string()
+      .min(5, { message: "Name cannot be shorter then 5" }),
+    [FormFieldsObject.Email]: z.string().email({ message: "Invalid email" }),
+    [FormFieldsObject.Message]: z
       .string()
       .min(10, { message: "Message cannot be shorter then 10" }),
   }),
