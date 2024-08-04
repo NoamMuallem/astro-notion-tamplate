@@ -21,8 +21,6 @@ const allPosts = await getPages({ databaseID: NOTION_POSTS_DB }).then((data) =>
     })
     .reverse()
 );
-
-export const prerender = true;
 ---
 
 <MainLayout title="Blog">
