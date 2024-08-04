@@ -38,7 +38,9 @@ export const prerender = true;
       all the posts are fetched from notion and only key properties about the
       posts are shown here
     </h3>
-    <ul>
+    <ul
+      class="gap-x-4 gap-y-4 m-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-full w-full"
+    >
       {allPosts.map((post) => <PostPreview transition:name="post" {...post} />)}
     </ul>
   </section>
