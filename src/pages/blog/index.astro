@@ -4,17 +4,20 @@ import PostPreview from "../../components/postPreview.astro";
 import MainLayout from "../../layouts/mainLayout.astro";
 import { getPages } from "../../utils/DB";
 
-// get all blog posts
+// get all blog posts - for build
 const allPosts = await getPages({ databaseID: NOTION_POSTS_DB }).then((data) =>
   data.results
-    //@ts-expect-error: Notion does not supply a full type coverage for it's tables
-    .map(({ properties }) => {
-      return {
-        title: properties.Title.title[0].plain_text as string,
-        slug: properties.Slug.rich_text[0].plain_text as string,
-        image: properties.BannerImage.url as string,
-        description: properties.Description.rich_text[0].plain_text as string,
-      };
+    .map((page) => {
+      if ("properties" in page) {
+        // notion does not provides type safe interfaces
+        const properties = page.properties as any;
+        return {
+          title: properties.Title.title[0].plain_text as string,
+          slug: properties.Slug.rich_text[0].plain_text as string,
+          image: properties.BannerImage.url as string,
+          description: properties.Description.rich_text[0].plain_text as string,
+        };
+      }
     })
     .reverse()
 );

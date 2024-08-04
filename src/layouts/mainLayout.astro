@@ -2,14 +2,14 @@
 import LoadingIndicator from "astro-loading-indicator/component";
 import { ViewTransitions } from "astro:transitions";
 import { NavBar } from "../features/navBar";
-const { Title } = Astro.props;
-// ssr the navbar, to allow maximum SEO, on static generation,
-// the reactive elements are rendered with JS, so it is better to do it on the servera,
+const { Title, direction = "ltr", language = "en" } = Astro.props;
+// SSR the navbar, to allow maximum SEO, on static generation,
+// the reactive elements are rendered with JS, so it is better to do it on the server,
 // espatially for the navbar, as it is a key element in the SEO score
 export const prerender = false;
 ---
 
-<html lang="en">
+<html lang={language} dir={direction}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
