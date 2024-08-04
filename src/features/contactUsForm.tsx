@@ -38,8 +38,9 @@ export function ContactUsForm() {
                 setFormSubmittedSuccessfully(true);
                 formTarget.reset()
             }
-        } catch (e) {
-            setSubmissionError(getErrorMessage(e))
+        } catch (error) {
+            console.error({ error })
+            setSubmissionError(getErrorMessage(error))
         }
         setLoading(false)
     }
