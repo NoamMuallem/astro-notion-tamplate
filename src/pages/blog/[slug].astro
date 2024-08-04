@@ -59,7 +59,7 @@ await notionRenderer.use(bookmarkPlugin(undefined));
 const html = await notionRenderer.render(...content);
 ---
 
-<MainLayout>
+<MainLayout title={title}>
   <article class="mb-10 flex w-full flex-col items-center px-2 pt-10">
     <div
       transition:name={`post-${slug}`}
