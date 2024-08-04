@@ -18,10 +18,10 @@ export const contactUsFormSubmission = defineAction({
         ...payload,
         databaseId: NOTION_CONTACT_US_DB_ID,
       });
-      return { payload, success: true };
+      return { success: true };
     } catch (e) {
       throw new ActionError({
-        message: "Failed to submit form",
+        message: "Unknown error occurred",
         code: "INTERNAL_SERVER_ERROR",
       });
     }
