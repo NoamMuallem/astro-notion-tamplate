@@ -15,8 +15,8 @@ const { slug, image, title, description } = Astro.props as {
   )}
 >
   <a class="space-y-2" href={`/blog/${slug}`}>
-    <h2 class="font-normal" transition:name="postTitle">{title}</h2>
-    <img transition:name="postBannerImage" src={image} alt={title} />
+    <h2 class="font-normal" transition:name={`postTitle-${slug}`}>{title}</h2>
+    <img transition:name={`postBannerImage-${slug}`} src={image} alt={title} />
     <p class="font-bold">{description}</p>
   </a>
 </li>

@@ -62,14 +62,17 @@ const html = await notionRenderer.render(...content);
 <MainLayout>
   <article class="mb-10 flex w-full flex-col items-center px-2 pt-10">
     <div
-      transition:name="post"
+      transition:name={`post-${slug}`}
       class="flex flex-col justify-center items-center"
     >
-      <h1 transition:name="postTitle" class="mb-8 text-6xl font-black">
+      <h1
+        transition:name={`postTitle-${slug}`}
+        class="mb-8 text-6xl font-black"
+      >
         {title}
       </h1>
       <img
-        transition:name="postBannerImage"
+        transition:name={`postBannerImage-${slug}`}
         alt="Blog Image"
         src={image}
         class="[width: 800px]!"
