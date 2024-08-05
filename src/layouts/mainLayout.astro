@@ -7,13 +7,15 @@ export type Props = {
   title: string;
   direction?: "ltr" | "rtl";
   language?: string;
+  description?: string;
 };
-const { title, direction = "ltr", language = "en" } = Astro.props;
+const { title, direction = "ltr", language = "en", description } = Astro.props;
 ---
 
 <html lang={language} dir={direction}>
   <head>
     <meta charset="utf-8" />
+    {description && <meta name="description" content={description} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="generator" content={Astro.generator} />

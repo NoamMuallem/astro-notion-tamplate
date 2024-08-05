@@ -49,6 +49,9 @@ if (!post) {
 const title = post.properties.Title.title[0].plain_text;
 // @ts-ignore: Notion does not supply a full type coverage for it's tables
 const image = post.properties.BannerImage.files[0].file.url;
+// @ts-ignore: Notion does not supply a full type coverage for it's tables
+const description = post.properties.Description.rich_text[0]
+  .plain_text as string;
 const content = await getPageContent(post.id);
 
 const notionRenderer = new NotionRenderer({
@@ -60,7 +63,7 @@ await notionRenderer.use(bookmarkPlugin(undefined));
 const html = await notionRenderer.render(...content);
 ---
 
-<MainLayout title={title}>
+<MainLayout description={description} title={title}>
   <article class="mb-10 flex w-full flex-col items-center px-2 pt-10">
     <div
       transition:name={`post-${slug}`}
@@ -77,6 +80,7 @@ const html = await notionRenderer.render(...content);
         transition:name={`postBannerImage-${slug}`}
         alt="Blog Image"
         src={image}
+        class="max-w-4xl"
       />
     </div>
     <div
@@ -136,7 +140,7 @@ const html = await notionRenderer.render(...content);
   }
 
   .notion-heading_2 {
-    @apply text-3xl font-bold my-1;
+    @apply text-4xl font-bold my-1;
   }
 
   .notion-heading_3 {
