@@ -95,9 +95,9 @@ export function ContactUsForm() {
                         </div>
                     )}
             </div>
-            {submissionResponse?.error?.code === "TOO_MANY_REQUESTS" && (
+            {/* {submissionResponse?.error?.code === "TOO_MANY_REQUESTS" && (
                 <div className="text-red-500">Rate limit exceeded</div>
-            )}
+            )} */}
             {!inputValidationError && // We don't want to show validation error twice
                 submissionResponse?.error && (
                     <div className="text-red-500">

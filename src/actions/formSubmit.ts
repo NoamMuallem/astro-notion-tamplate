@@ -17,6 +17,12 @@ export const contactUsFormSubmission = defineAction({
   accept: "form",
   handler: async (payload) => {
     try {
+      //   if (await isRateLimited(ctx)) {
+      //     throw new ActionError({
+      //       message: "Too many requests",
+      //       code: "TOO_MANY_REQUESTS",
+      //     });
+      //   }
       await addLeadToNotion({
         ...payload,
         databaseId: NOTION_CONTACT_US_DB_ID,
