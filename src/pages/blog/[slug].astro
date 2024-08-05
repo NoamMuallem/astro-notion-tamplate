@@ -47,7 +47,7 @@ if (!post) {
 // @ts-ignore: Notion does not supply a full type coverage for it's tables
 const title = post.properties.Title.title[0].plain_text;
 // @ts-ignore: Notion does not supply a full type coverage for it's tables
-const image = post.properties.BannerImage.url;
+const image = post.properties.BannerImage.files[0].file.url;
 const content = await getPageContent(post.id);
 
 const notionRenderer = new NotionRenderer({

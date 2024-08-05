@@ -14,7 +14,7 @@ const allPosts = await getPages({ databaseID: NOTION_POSTS_DB }).then((data) =>
         return {
           title: properties.Title.title[0].plain_text as string,
           slug: properties.Slug.rich_text[0].plain_text as string,
-          image: properties.BannerImage.url as string,
+          image: properties.BannerImage.files[0].file.url,
           description: properties.Description.rich_text[0].plain_text as string,
         };
       }
