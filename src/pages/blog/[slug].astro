@@ -3,6 +3,7 @@ import bookmarkPlugin from "@notion-render/bookmark-plugin";
 import { NotionRenderer } from "@notion-render/client";
 import hljsPlugin from "@notion-render/hljs-plugin";
 import type { GetStaticPaths } from "astro";
+import { Image } from "astro:assets";
 import { NOTION_POSTS_DB } from "astro:env/server";
 import MainLayout from "../../layouts/mainLayout.astro";
 import {
@@ -71,7 +72,8 @@ const html = await notionRenderer.render(...content);
       >
         {title}
       </h1>
-      <img
+      <Image
+        inferSize={true}
         transition:name={`postBannerImage-${slug}`}
         alt="Blog Image"
         src={image}
