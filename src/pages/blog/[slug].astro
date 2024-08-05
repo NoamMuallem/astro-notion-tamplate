@@ -80,7 +80,12 @@ const html = await notionRenderer.render(...content);
       />
     </div>
     <div
-      class="mt-4
+      class="prose-headings:text-slate-900
+      dark:prose-headings:text-gray-200
+      dark:text-gray-400 dark:prose-strong:text-gray-400 dark:prose-code:text-slate-400
+      dark:prose-a:text-gray-300 prose-a:text-slate-900
+      prose-blockquote:text-slate-800 dark:prose-blockquote:text-slate-400
+        mt-4
         max-w-4xl
         space-y-6
         text-xl
@@ -101,7 +106,6 @@ const html = await notionRenderer.render(...content);
         prose-strong:font-normal
         prose-headings:font-pacamara-space
         prose-h2:mb-7
-        dark:prose-a:text-white
         dark:prose-a:hover:text-pacamara-accent
         dark:prose-p:text-white/70
         sm:text-sm
@@ -160,7 +164,7 @@ const html = await notionRenderer.render(...content);
   }
 
   p {
-    @apply text-lg mt-0;
+    @apply text-lg !mt-1;
   }
 
   pre {
