@@ -121,6 +121,12 @@ const html = await notionRenderer.render(...content);
 </MainLayout>
 
 <style is:global>
+  .notion-table {
+    @apply !mt-1 border-solid dark:border-gray-200 border-2;
+  }
+  .notion-table_cell {
+    @apply text-lg dark:text-slate-300 text-slate-800 font-bold px-4 py-2;
+  }
   .notion-heading_1 {
     @apply text-4xl font-bold my-2;
   }
@@ -164,6 +170,11 @@ const html = await notionRenderer.render(...content);
   .notion-code {
     @apply rounded-md bg-gray-200 p-2 dark:bg-gray-200 text-sm overflow-auto max-w-[95vw];
     direction: ltr;
+  }
+
+  .notion-text-code:before,
+  .notion-text-code:after {
+    content: "";
   }
 
   .notion-text-code {
