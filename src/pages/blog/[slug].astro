@@ -165,7 +165,7 @@ const html = await notionRenderer.render(...content);
   }
 
   .notion-text-code {
-    @apply inline-block rounded bg-gray-400 dark:bg-gray-200 px-2 md:px-3 lg:px-4;
+    @apply inline-block rounded bg-gray-200 dark:bg-gray-700 text-red-500 font-medium px-2;
     direction: ltr;
   }
 
@@ -204,11 +204,6 @@ const html = await notionRenderer.render(...content);
 
   .notion-text-bold {
     @apply font-bold;
-  }
-
-  .notion-text-code {
-    @apply inline-block rounded dark:bg-gray-200 bg-gray-400 px-2;
-    direction: ltr;
   }
 
   .notion-heading_1 {
