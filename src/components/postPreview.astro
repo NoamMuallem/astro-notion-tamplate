@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { cn } from "../utils/cn";
 const { slug, image, title, description } = Astro.props as {
   slug: string;
@@ -17,7 +18,8 @@ const { slug, image, title, description } = Astro.props as {
 >
   <a data-astro-prefetch="viewport" class="space-y-2" href={`/blog/${slug}`}>
     <h2 class="font-normal" transition:name={`postTitle-${slug}`}>{title}</h2>
-    <img
+    <Image
+      inferSize={true}
       transition:name={`postBannerImage-${slug}`}
       src={image}
       alt={title}
