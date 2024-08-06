@@ -7,7 +7,7 @@ export type Props = {
   title: string;
   direction?: "ltr" | "rtl";
   language?: string;
-  description?: string;
+  description: string;
 };
 const { title, direction = "ltr", language = "en", description } = Astro.props;
 ---
