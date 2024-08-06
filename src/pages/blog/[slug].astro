@@ -71,7 +71,7 @@ const html = await notionRenderer.render(...content);
     >
       <h1
         transition:name={`postTitle-${slug}`}
-        class="mb-8 text-6xl font-black"
+        class="text-4xl sm:text-5xl md:text-6xl mb-8 font-black"
       >
         {title}
       </h1>
@@ -80,7 +80,7 @@ const html = await notionRenderer.render(...content);
         transition:name={`postBannerImage-${slug}`}
         alt="Blog Image"
         src={image}
-        class="max-w-4xl"
+        class="max-w-full md:max-w-4xl rounded-lg"
       />
     </div>
     <div
@@ -132,39 +132,21 @@ const html = await notionRenderer.render(...content);
   .notion-table {
     @apply !mt-1 border-solid dark:border-gray-200 border-2;
   }
+
   .notion-table_cell {
     @apply text-lg dark:text-slate-300 text-slate-800 font-bold px-4 py-2;
   }
-  .notion-heading_1 {
-    @apply text-4xl font-bold my-2;
-  }
 
   .notion-heading_2 {
-    @apply text-5xl font-bold my-1;
+    @apply text-3xl sm:text-4xl md:text-5xl font-bold my-1;
   }
 
   .notion-heading_3 {
-    @apply text-2xl font-bold mb-5;
-  }
-
-  .notion-heading_4 {
-    @apply text-xl font-bold;
-  }
-
-  .notion-heading_5 {
-    @apply text-lg font-bold;
-  }
-
-  .notion-heading_6 {
-    @apply text-base font-bold;
+    @apply text-lg sm:text-xl md:text-2xl font-bold mb-5;
   }
 
   .notion-bulleted_list {
     @apply list-disc pr-4 pl-6;
-  }
-
-  summary {
-    @apply cursor-pointer;
   }
 
   p {
@@ -225,10 +207,6 @@ const html = await notionRenderer.render(...content);
 
   .notion-text-bold {
     @apply font-bold;
-  }
-
-  .notion-heading_1 {
-    @apply mb-4 mt-5 font-bold;
   }
 
   .notion-numbered_list .notion-numbered_list_item::marker {
