@@ -15,7 +15,7 @@ const { slug, image, title, description } = Astro.props as {
     "hover:scale-105 transition-transform duration-300"
   )}
 >
-  <a data-astro-prefetch class="space-y-2" href={`/blog/${slug}`}>
+  <a data-astro-prefetch="viewport" class="space-y-2" href={`/blog/${slug}`}>
     <h2 class="font-normal" transition:name={`postTitle-${slug}`}>{title}</h2>
     <img
       transition:name={`postBannerImage-${slug}`}
