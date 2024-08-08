@@ -10,10 +10,6 @@ export type Props = {
   description: string;
 };
 const { title, direction = "ltr", language = "en", description } = Astro.props;
-Astro.response.headers.set(
-  "Cache-Control",
-  "public, max-age=300, s-maxage=86400"
-);
 ---
 
 <html lang={language} dir={direction}>

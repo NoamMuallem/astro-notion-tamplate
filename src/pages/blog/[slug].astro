@@ -58,6 +58,11 @@ const notionRenderer = new NotionRenderer({
   client: notionClient,
 });
 
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=300, s-maxage=86400"
+);
+
 await notionRenderer.use(hljsPlugin({}));
 await notionRenderer.use(bookmarkPlugin(undefined));
 const html = await notionRenderer.render(...content);

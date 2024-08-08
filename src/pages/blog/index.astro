@@ -21,6 +21,11 @@ const allPosts = await getPages({ databaseID: NOTION_POSTS_DB }).then((data) =>
     })
     .reverse()
 );
+
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=300, s-maxage=86400"
+);
 ---
 
 <MainLayout title="Blog" description="The astro blog posts page">
