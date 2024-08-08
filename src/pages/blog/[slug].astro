@@ -1,24 +1,14 @@
 ---
-import bookmarkPlugin from "@notion-render/bookmark-plugin";
-import { NotionRenderer } from "@notion-render/client";
-import hljsPlugin from "@notion-render/hljs-plugin";
 import type { GetStaticPaths } from "astro";
 import { Image } from "astro:assets";
 import { NOTION_POSTS_DB } from "astro:env/server";
 import MainLayout from "../../layouts/mainLayout.astro";
-import {
-  getPageBySlug,
-  getPageContent,
-  getPages,
-  notionClient,
-} from "../../utils/DB";
+import { getPages } from "../../utils/DB";
+import { extractPostData } from "../../utils/extractPostData";
 
-// This only runs suring the build time of the pages, it gets all the available slugs
 export const getStaticPaths = (async () => {
   return await getPages({
     databaseID: NOTION_POSTS_DB,
-    // We want to build all the pages, for viewing and testing, the link for the user
-    // to navigate to the post will not be created.
     publishedOnly: false,
   }).then((data) =>
     data.results
@@ -37,38 +27,15 @@ const { slug } = Astro.params as {
   slug: string;
 };
 
-// only runs during build time, fetch all the post content by slug
-const post = await getPageBySlug(slug as string, NOTION_POSTS_DB);
-if (!post) {
-  return {
-    status: 404,
-    error: new Error(`Post not found`),
-  };
-}
-// @ts-ignore: Notion does not supply a full type coverage for it's tables
-const title = post.properties.Title.title[0].plain_text;
-// @ts-ignore: Notion does not supply a full type coverage for it's tables
-const image = post.properties.BannerImage.files[0].file.url;
-// @ts-ignore: Notion does not supply a full type coverage for it's tables
-const description = post.properties.Description.rich_text[0]
-  .plain_text as string;
-const content = await getPageContent(post.id);
-
-const notionRenderer = new NotionRenderer({
-  client: notionClient,
-});
+const { title, image, description, html } = await extractPostData({ slug });
 
 Astro.response.headers.set(
   "Cache-Control",
   "public, max-age=300, s-maxage=3600"
 );
-
-await notionRenderer.use(hljsPlugin({}));
-await notionRenderer.use(bookmarkPlugin(undefined));
-const html = await notionRenderer.render(...content);
 ---
 
-<MainLayout description={description} title={title}>
+<MainLayout description={description ?? ""} title={title}>
   <article class="mb-10 flex w-full flex-col items-center px-2 pt-10">
     <div
       transition:name={`post-${slug}`}
