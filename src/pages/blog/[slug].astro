@@ -1,33 +1,15 @@
 ---
-import type { GetStaticPaths } from "astro";
 import { Image } from "astro:assets";
-import { NOTION_POSTS_DB } from "astro:env/server";
 import MainLayout from "../../layouts/mainLayout.astro";
-import { getPages } from "../../utils/DB";
 import { extractPostData } from "../../utils/extractPostData";
-
-export const getStaticPaths = (async () => {
-  return await getPages({
-    databaseID: NOTION_POSTS_DB,
-    publishedOnly: false,
-  }).then((data) =>
-    data.results
-      //@ts-expect-error: Notion does not supply a full type coverage for it's tables
-      .map(({ properties }) => {
-        return {
-          params: {
-            slug: properties.Slug.rich_text[0].plain_text as string,
-          },
-        };
-      })
-  );
-}) satisfies GetStaticPaths;
 
 const { slug } = Astro.params as {
   slug: string;
 };
 
 const { title, image, description, html } = await extractPostData({ slug });
+
+export const prerender = false;
 
 Astro.response.headers.set(
   "Cache-Control",
